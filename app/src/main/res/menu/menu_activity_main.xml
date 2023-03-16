@@ -1,0 +1,15 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/menu_activity_main_search"
+        android:icon="@drawable/notifications_white_24dp"
+        android:title="Rechercher"
+        android:visible="true"
+        app:showAsAction="ifRoom"></item>
+    <item
+        android:id="@+id/menu_activity_main_params"
+        android:icon="@drawable/more_vert_white_24dp"
+        android:title="Paramètres"
+        android:visible="true"
+        app:showAsAction="ifRoom"></item>
+</menu>
