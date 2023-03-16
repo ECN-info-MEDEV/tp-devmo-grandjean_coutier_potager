@@ -9,7 +9,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/Theme.MonPotager"
+        android:theme="@style/AppTheme"
         tools:targetApi="31">
         <activity
             android:name=".MainActivity"
@@ -20,14 +20,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".FormActivity"
-            android:exported="false">
-        </activity>
-        <activity
-            android:name=".SpinnerActivity"
-            android:exported="false">
-        </activity>
+        <!-- A child of the main activity -->
     </application>
 
 </manifest>
