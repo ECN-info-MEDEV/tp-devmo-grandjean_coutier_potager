@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 
 public class HomeFragment extends Fragment {
@@ -20,4 +21,8 @@ public class HomeFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
 
+    public void ValidateForm(View view) {
+        Toast toast = Toast.makeText(getActivity(), R.string.toast_message, Toast.LENGTH_LONG);
+        toast.show();
+    }
 }
