@@ -20,6 +20,16 @@
         <item name="colorControlNormal">@android:color/white</item>
     </style>
 
+    <style name="table_header" parent="@android:style/TextAppearance.Small">
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">40sp</item>
+    </style>
+
 
 
 </resources>
