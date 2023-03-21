@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.monpotager.actionslist.ActionAdapter;
 import com.example.monpotager.database.ActionViewModel;
@@ -46,4 +47,9 @@ public class HomeFragment extends Fragment {
         return layout;
     }
 
+    public void ValidateForm(View view) {
+        Toast toast = Toast.makeText(getActivity(), R.string.toast_message, Toast.LENGTH_LONG);
+        toast.show();
+    }
 }
+
