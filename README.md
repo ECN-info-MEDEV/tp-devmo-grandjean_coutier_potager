@@ -1,7 +1,7 @@
 # tp-devmo-grandjean_coutier_potager
 Pour ce TP, nous avons choisi d'implémenter les éléments suivants :
   - la vue Historique Global de la page d'accueil, listant l'ensemble des actions ayant été effectuées sur le potager
-  - la vue Ajouter une action, contenant un formulaire pour ajouter une action sur une parcelle
+  - la vue Ajouter une action, contenant un formulaire pour ajouter une action sur une parcelle dans la base de données
   - une barre de navigation entre les deux vues ci-dessus
   - une base de données pour les Actions et les parcelles
 
@@ -20,6 +20,7 @@ Sur la page d'accueil :
  - Pour plus de simplicité, le type d'action Autre n'a pas été implémenté
  - La possibilité de signaler un problème a aussi été retirée, car c'est une instance au fonctionnement différent de celui d'une simple Action
  - La possibilité de joindre une image ainsi que de rentrer une description n'a pas non plus été implémentée, encore une fois pour plus de simplicité
+ - Seul le bouton 'valider' (et pas le bouton annuler) a été implémenté.
 
  Dans la base de données :
  - Les utilisateurs n'ont donc pas été pris en compte
