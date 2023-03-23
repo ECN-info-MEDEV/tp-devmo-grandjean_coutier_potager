@@ -45,7 +45,7 @@ public class AddFragment extends Fragment {
     /**
      * List of all available Parcelles to display in the Spinner
      */
-    private List<String> parcellesList;
+    private List<String> parcellesList = new ArrayList<String>();
 
     // attribut pour stocker l'action choisie
     private String actionchoisie = "";
@@ -85,7 +85,7 @@ public class AddFragment extends Fragment {
         //Création et implémentation du spinner
         Spinner spinner = v.findViewById(R.id.spinner);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this.getActivity(),
-                android.R.layout.simple_spinner_item,
+                R.layout.spinner_item,
                 finalPlanetsArray);
         adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
         spinner.setAdapter(adapter);
@@ -134,7 +134,7 @@ public class AddFragment extends Fragment {
         // Implémentation de la fonction du bouton arroser
         buttonarrosage.setOnClickListener(v15 -> {
             actionchoisie = "Arroser";
-            buttonarrosage.getBackground().setColorFilter(ContextCompat.getColor(context, R.color.colorPrimary), PorterDuff.Mode.MULTIPLY);
+            buttonarrosage.getBackground().setColorFilter(ContextCompat.getColor(context, R.color.selectedButton), PorterDuff.Mode.MULTIPLY);
             buttondesherbage.getBackground().setColorFilter(ContextCompat.getColor(context, R.color.backgroundButton), PorterDuff.Mode.MULTIPLY);
             buttonrecolte.getBackground().setColorFilter(ContextCompat.getColor(context, R.color.backgroundButton), PorterDuff.Mode.MULTIPLY);
             buttonremise0.getBackground().setColorFilter(ContextCompat.getColor(context, R.color.backgroundButton), PorterDuff.Mode.MULTIPLY);
@@ -144,7 +144,7 @@ public class AddFragment extends Fragment {
         // Implémentation de la fonction du bouton désherber
         buttondesherbage.setOnClickListener(v14 -> {
             actionchoisie = "Désherber";
-            buttondesherbage.getBackground().setColorFilter(ContextCompat.getColor(context, R.color.colorPrimary), PorterDuff.Mode.MULTIPLY);
+            buttondesherbage.getBackground().setColorFilter(ContextCompat.getColor(context, R.color.selectedButton), PorterDuff.Mode.MULTIPLY);
             buttonarrosage.getBackground().setColorFilter(ContextCompat.getColor(context, R.color.backgroundButton), PorterDuff.Mode.MULTIPLY);
             buttonrecolte.getBackground().setColorFilter(ContextCompat.getColor(context, R.color.backgroundButton), PorterDuff.Mode.MULTIPLY);
             buttonremise0.getBackground().setColorFilter(ContextCompat.getColor(context, R.color.backgroundButton), PorterDuff.Mode.MULTIPLY);
@@ -154,7 +154,7 @@ public class AddFragment extends Fragment {
         // Implémentation de la fonction du bouton récolter
         buttonrecolte.setOnClickListener(v13 -> {
             actionchoisie = "Récolter";
-            buttonrecolte.getBackground().setColorFilter(ContextCompat.getColor(context, R.color.colorPrimary), PorterDuff.Mode.MULTIPLY);
+            buttonrecolte.getBackground().setColorFilter(ContextCompat.getColor(context, R.color.selectedButton), PorterDuff.Mode.MULTIPLY);
             buttondesherbage.getBackground().setColorFilter(ContextCompat.getColor(context, R.color.backgroundButton), PorterDuff.Mode.MULTIPLY);
             buttonarrosage.getBackground().setColorFilter(ContextCompat.getColor(context, R.color.backgroundButton), PorterDuff.Mode.MULTIPLY);
             buttonremise0.getBackground().setColorFilter(ContextCompat.getColor(context, R.color.backgroundButton), PorterDuff.Mode.MULTIPLY);
@@ -164,7 +164,7 @@ public class AddFragment extends Fragment {
         // Implémentation de la fonction du remise0
         buttonremise0.setOnClickListener(v12 -> {
             actionchoisie = "Remise à 0";
-            buttonremise0.getBackground().setColorFilter(ContextCompat.getColor(context, R.color.colorPrimary), PorterDuff.Mode.MULTIPLY);
+            buttonremise0.getBackground().setColorFilter(ContextCompat.getColor(context, R.color.selectedButton), PorterDuff.Mode.MULTIPLY);
             buttondesherbage.getBackground().setColorFilter(ContextCompat.getColor(context, R.color.backgroundButton), PorterDuff.Mode.MULTIPLY);
             buttonrecolte.getBackground().setColorFilter(ContextCompat.getColor(context, R.color.backgroundButton), PorterDuff.Mode.MULTIPLY);
             buttonarrosage.getBackground().setColorFilter(ContextCompat.getColor(context, R.color.backgroundButton), PorterDuff.Mode.MULTIPLY);
@@ -174,7 +174,7 @@ public class AddFragment extends Fragment {
         // Implémentation de la fonction du bouton planter
         buttonplantation.setOnClickListener(v1 -> {
             actionchoisie = "Planter";
-            buttonplantation.getBackground().setColorFilter(ContextCompat.getColor(context, R.color.colorPrimary), PorterDuff.Mode.MULTIPLY);
+            buttonplantation.getBackground().setColorFilter(ContextCompat.getColor(context, R.color.selectedButton), PorterDuff.Mode.MULTIPLY);
             buttondesherbage.getBackground().setColorFilter(ContextCompat.getColor(context, R.color.backgroundButton), PorterDuff.Mode.MULTIPLY);
             buttonrecolte.getBackground().setColorFilter(ContextCompat.getColor(context, R.color.backgroundButton), PorterDuff.Mode.MULTIPLY);
             buttonarrosage.getBackground().setColorFilter(ContextCompat.getColor(context, R.color.backgroundButton), PorterDuff.Mode.MULTIPLY);
