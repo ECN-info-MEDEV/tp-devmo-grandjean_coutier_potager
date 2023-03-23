@@ -101,11 +101,9 @@ public class AddFragment extends Fragment {
         // Create ActionViewModel and get all parcelles. Create a list of "Parcelle n°id".
         mActionViewModel = new ViewModelProvider(this).get(ActionViewModel.class);
         mActionViewModel.getAllParcelles().observe(this.getViewLifecycleOwner(), parcelles -> {
-            AtomicInteger i= new AtomicInteger();
             parcelles.forEach(parcelle -> {
                 String parcelleName = "Parcelle n°" + parcelle.getId();
                 parcellesList.add(parcelleName);
-                i.getAndIncrement();
         });
 
         //Creates and implements the spinner to choose a Parcelle
@@ -126,9 +124,9 @@ public class AddFragment extends Fragment {
                 Toast toast = Toast.makeText(context, "Vous devez choisir une action réalisée", Toast.LENGTH_LONG);
                 toast.show();
             //Checking that a date is selected
-            } else if (TextUtils.isEmpty(editDateView.getText())){
+            } else if (! editDateView.getText().toString().matches("\\d{2}[/]\\d{2}[/]\\d{4}")){
                 // Informing that the input is not correct
-                Toast toast = Toast.makeText(context, "Vous devez choisir une date", Toast.LENGTH_LONG);
+                Toast toast = Toast.makeText(context, "La date n'est pas au bon format", Toast.LENGTH_LONG);
                 toast.show();
             } else {
                 // Get the Spinner value
