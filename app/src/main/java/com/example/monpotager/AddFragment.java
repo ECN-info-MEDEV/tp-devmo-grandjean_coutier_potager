@@ -84,7 +84,7 @@ public class AddFragment extends Fragment {
             String[] finalParcelleArray = parcellesList.toArray(new String[parcellesList.size()]);
             spinner = v.findViewById(R.id.spinner);
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getActivity(),
-                    android.R.layout.simple_spinner_item, finalParcelleArray);
+                    R.layout.spinner_item, finalParcelleArray);
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spinner.setAdapter(adapter);
         });
