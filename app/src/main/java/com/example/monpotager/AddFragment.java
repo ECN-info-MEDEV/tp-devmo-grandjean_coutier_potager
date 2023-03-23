@@ -25,9 +25,9 @@ import android.widget.Toast;
 import com.example.monpotager.database.ActionViewModel;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Fragment which enable the creation of the form to add an action
@@ -45,8 +45,9 @@ public class AddFragment extends Fragment {
     /**
      * List of all available Parcelles to display in the Spinner
      */
-    private List<String> parcellesList = new ArrayList<String>();
 
+    private List<String> parcellesList = new ArrayList<>();
+    private Spinner spinner;
     // attribut pour stocker l'action choisie
     private String actionchoisie = "";
 
@@ -56,16 +57,6 @@ public class AddFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_add, container, false);
         Resources res = getResources();
         Context context = getActivity().getApplicationContext();
-        
-        // Create ActionViewModel and get all Actions
-        mActionViewModel = new ViewModelProvider(this).get(ActionViewModel.class);
-        mActionViewModel.getAllParcelles().observe(this.getViewLifecycleOwner(), parcelles -> {
-            parcelles.forEach(parcelle -> {
-                String parcelleName = "Parcelle n°" + String.valueOf(parcelle.getId());
-                parcellesList.add(parcelleName);
-            });
-
-        });
 
         //mise à zéro de l'action
         actionchoisie = "";
@@ -75,53 +66,51 @@ public class AddFragment extends Fragment {
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/YYYY");
         String date = formatter.format(now);
 
-        // Mettre le bon élément en première position du spinner pour qu'il puisse de cette manière apparaitre directement lorsqu'on ouvre le form
-        String[] planetsArray = res.getStringArray(R.array.planets_array);
-        List<String> planetList = new ArrayList<>(Arrays.asList(planetsArray));
-        planetList.remove("Venus");
-        planetList.add(0, "Venus");
-        String[] finalPlanetsArray = planetList.toArray(new String[planetList.size()]);
-
-        //Création et implémentation du spinner
-        Spinner spinner = v.findViewById(R.id.spinner);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this.getActivity(),
-                R.layout.spinner_item,
-                finalPlanetsArray);
-        adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
-        spinner.setAdapter(adapter);
-
         // Implémentation de la date du jour dans le form de date
         EditText dateView = v.findViewById(R.id.editTextDate);
         dateView.setText(date);
+        
+        // Create ActionViewModel and get all Actions
+        mActionViewModel = new ViewModelProvider(this).get(ActionViewModel.class);
+        mActionViewModel.getAllParcelles().observe(this.getViewLifecycleOwner(), parcelles -> {
+            AtomicInteger i= new AtomicInteger();
+            parcelles.forEach(parcelle -> {
+                String parcelleName = "Parcelle n°" + String.valueOf(parcelle.getId());
+                parcellesList.add(parcelleName);
+                i.getAndIncrement();
+            });
+
+            //Création et implémentation du spinner
+            String[] finalParcelleArray = parcellesList.toArray(new String[parcellesList.size()]);
+            spinner = v.findViewById(R.id.spinner);
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getActivity(),
+                    android.R.layout.simple_spinner_item, finalParcelleArray);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            spinner.setAdapter(adapter);
+        });
 
         // Implémentation de la fonction du bouton valider
         Button button = v.findViewById(R.id.button_validate);
-        button.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                // On vérifie qu'une action est bien sélectionnée.
-                // Pour la parcelle ainsi que la date on a lors de l'affichage des valeurs par defaut donc pas besoin de les vérifier
-                // passe bien dans la fonction et le toast fonctionne
-                if (actionchoisie.isEmpty()){
-                    // On indique que la saisie n'est pas valide
-                    Toast toast = Toast.makeText(context, "Vous devez choisir une action réalisée", Toast.LENGTH_LONG);
-                    toast.show();
-                }
-                else {
-                    // Récupération de la valeur du Spinner
-                    String parcelleName = spinner.getSelectedItem().toString();
-                    String parcelleIdString = parcelleName.substring(parcelleName.length() - 1);
-                    Long parcelleId = parseLong(parcelleIdString);
-                    Log.d("Sélection", parcelleIdString);
-
-                    // On indique que l'action a bien été enregistrée
-                    Toast toast = Toast.makeText(context, "Action enregistrée", Toast.LENGTH_LONG);
-                    toast.show();
-                }
+        button.setOnClickListener(v16 -> {
+            // On vérifie qu'une action est bien sélectionnée.
+            // Pour la parcelle ainsi que la date on a lors de l'affichage des valeurs par defaut donc pas besoin de les vérifier
+            // passe bien dans la fonction et le toast fonctionne
+            if (actionchoisie.isEmpty()){
+                // On indique que la saisie n'est pas valide
+                Toast toast = Toast.makeText(context, "Vous devez choisir une action réalisée", Toast.LENGTH_LONG);
+                toast.show();
             }
+            else {
+                // Récupération de la valeur du Spinner
+                String parcelleName = spinner.getSelectedItem().toString();
+                String parcelleIdString = parcelleName.substring(parcelleName.length() - 1);
+                Long parcelleId = parseLong(parcelleIdString);
+                Log.d("Sélection", parcelleIdString);
 
+                // On indique que l'action a bien été enregistrée
+                Toast toast = Toast.makeText(context, "Action enregistrée", Toast.LENGTH_LONG);
+                toast.show();
+            }
         });
 
         // Récupération des différents boutons
