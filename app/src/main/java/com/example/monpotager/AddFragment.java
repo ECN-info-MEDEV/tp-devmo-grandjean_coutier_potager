@@ -1,8 +1,11 @@
 package com.example.monpotager;
 
+import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -22,9 +25,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * A simple {@link Fragment} subclass.
- * Use the {@link AddFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * Fragment which enable the creation of the form to add an action
  */
 public class AddFragment extends Fragment {
     public static AddFragment newInstance() {
@@ -41,10 +42,15 @@ public class AddFragment extends Fragment {
      */
     private List<String> parcellesList;
 
+    // attribut pour stocker l'action choisie
+    private String actionchoisie = "";
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_add, container, false);
         Resources res = getResources();
+        Context context = getActivity().getApplicationContext();
 
         // Create ActionViewModel and get all Actions
         mActionViewModel = new ViewModelProvider(this).get(ActionViewModel.class);
@@ -71,16 +77,113 @@ public class AddFragment extends Fragment {
         adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
         spinner.setAdapter(adapter);
 
-        //on vérifie qu'on récupère bien la valueur rentrée
-
-        Button button = (Button) v.findViewById(R.id.button_validate);
+        // Implémentation de la fonction du bouton valider
+        Button button = v.findViewById(R.id.button_validate);
         button.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-                Toast toast = Toast.makeText(getActivity(), R.string.toast_message, Toast.LENGTH_LONG);
-                toast.show();
+                // On vérifie qu'une action est bien sélectionnée.
+                // Pour la parcelle ainsi que la date on a lors de l'affichage des valeurs par defaut donc pas besoin de les vérifier
+                // passe bien dans la fonction et le toast fonctionne
+                if (actionchoisie.isEmpty()){
+                    // On indique que la saisie n'est pas valide
+                    Toast toast = Toast.makeText(context, "Vous devez choisir une action réalisée", Toast.LENGTH_LONG);
+                    toast.show();
+                }
+                else {
+                    // Récupération de la valeur du Spinner
+                    String text = spinner.getSelectedItem().toString();
+                    Log.d("Sélection", text);
+
+                    // On indique que l'action a bien été enregistrée
+                    Toast toast = Toast.makeText(context, "Action enregistrée", Toast.LENGTH_LONG);
+                    toast.show();
+                }
+
+            }
+        });
+
+        // Récupération des différents boutons
+        Button buttonarrosage = v.findViewById(R.id.button_arrosage);
+        Button buttondesherbage = v.findViewById(R.id.button_désherbage);
+        Button buttonremise0 = v.findViewById(R.id.button_remise0);
+        Button buttonrecolte = v.findViewById(R.id.button_recolte);
+        Button buttonplantation = v.findViewById(R.id.button_plantation);
+
+        // Implémentation de la fonction du bouton arroser
+        buttonarrosage.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                actionchoisie = "Arroser";
+                buttonarrosage.getBackground().setColorFilter(ContextCompat.getColor(context, R.color.colorPrimary), PorterDuff.Mode.MULTIPLY);
+                buttondesherbage.getBackground().setColorFilter(ContextCompat.getColor(context, R.color.backgroundButton), PorterDuff.Mode.MULTIPLY);
+                buttonrecolte.getBackground().setColorFilter(ContextCompat.getColor(context, R.color.backgroundButton), PorterDuff.Mode.MULTIPLY);
+                buttonremise0.getBackground().setColorFilter(ContextCompat.getColor(context, R.color.backgroundButton), PorterDuff.Mode.MULTIPLY);
+                buttonplantation.getBackground().setColorFilter(ContextCompat.getColor(context, R.color.backgroundButton), PorterDuff.Mode.MULTIPLY);
+            }
+        });
+
+        // Implémentation de la fonction du bouton désherber
+        buttondesherbage.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                actionchoisie = "Désherber";
+                buttondesherbage.getBackground().setColorFilter(ContextCompat.getColor(context, R.color.colorPrimary), PorterDuff.Mode.MULTIPLY);
+                buttonarrosage.getBackground().setColorFilter(ContextCompat.getColor(context, R.color.backgroundButton), PorterDuff.Mode.MULTIPLY);
+                buttonrecolte.getBackground().setColorFilter(ContextCompat.getColor(context, R.color.backgroundButton), PorterDuff.Mode.MULTIPLY);
+                buttonremise0.getBackground().setColorFilter(ContextCompat.getColor(context, R.color.backgroundButton), PorterDuff.Mode.MULTIPLY);
+                buttonplantation.getBackground().setColorFilter(ContextCompat.getColor(context, R.color.backgroundButton), PorterDuff.Mode.MULTIPLY);
+            }
+        });
+
+        // Implémentation de la fonction du bouton récolter
+        buttonrecolte.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                actionchoisie = "Récolter";
+                buttonrecolte.getBackground().setColorFilter(ContextCompat.getColor(context, R.color.colorPrimary), PorterDuff.Mode.MULTIPLY);
+                buttondesherbage.getBackground().setColorFilter(ContextCompat.getColor(context, R.color.backgroundButton), PorterDuff.Mode.MULTIPLY);
+                buttonarrosage.getBackground().setColorFilter(ContextCompat.getColor(context, R.color.backgroundButton), PorterDuff.Mode.MULTIPLY);
+                buttonremise0.getBackground().setColorFilter(ContextCompat.getColor(context, R.color.backgroundButton), PorterDuff.Mode.MULTIPLY);
+                buttonplantation.getBackground().setColorFilter(ContextCompat.getColor(context, R.color.backgroundButton), PorterDuff.Mode.MULTIPLY);
+            }
+        });
+
+        // Implémentation de la fonction du remise0
+        buttonremise0.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                actionchoisie = "Remise à 0";
+                buttonremise0.getBackground().setColorFilter(ContextCompat.getColor(context, R.color.colorPrimary), PorterDuff.Mode.MULTIPLY);
+                buttondesherbage.getBackground().setColorFilter(ContextCompat.getColor(context, R.color.backgroundButton), PorterDuff.Mode.MULTIPLY);
+                buttonrecolte.getBackground().setColorFilter(ContextCompat.getColor(context, R.color.backgroundButton), PorterDuff.Mode.MULTIPLY);
+                buttonarrosage.getBackground().setColorFilter(ContextCompat.getColor(context, R.color.backgroundButton), PorterDuff.Mode.MULTIPLY);
+                buttonplantation.getBackground().setColorFilter(ContextCompat.getColor(context, R.color.backgroundButton), PorterDuff.Mode.MULTIPLY);
+            }
+        });
+
+        // Implémentation de la fonction du bouton planter
+        buttonplantation.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                actionchoisie = "Planter";
+                buttonplantation.getBackground().setColorFilter(ContextCompat.getColor(context, R.color.colorPrimary), PorterDuff.Mode.MULTIPLY);
+                buttondesherbage.getBackground().setColorFilter(ContextCompat.getColor(context, R.color.backgroundButton), PorterDuff.Mode.MULTIPLY);
+                buttonrecolte.getBackground().setColorFilter(ContextCompat.getColor(context, R.color.backgroundButton), PorterDuff.Mode.MULTIPLY);
+                buttonarrosage.getBackground().setColorFilter(ContextCompat.getColor(context, R.color.backgroundButton), PorterDuff.Mode.MULTIPLY);
+                buttonremise0.getBackground().setColorFilter(ContextCompat.getColor(context, R.color.backgroundButton), PorterDuff.Mode.MULTIPLY);
             }
         });
 
