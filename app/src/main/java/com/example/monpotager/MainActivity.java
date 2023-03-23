@@ -15,21 +15,41 @@ import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
+/**
+ * Function used to manage Main Activity of the Application
+ */
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    //FOR DESIGN
+    /**
+     * Toolbar displayed on top of the screen
+     */
     private Toolbar toolbar;
+    /**
+     * DrawerLayout used to choose a fragment to display
+     */
     private DrawerLayout drawerLayout;
+    /**
+     * NavigationView to navigate between fragments
+     */
     private NavigationView navigationView;
 
-    //FOR FRAGMENTS
+    /**
+     * Fragment displaying Home View
+     */
     private Fragment fragmentHome;
+    /**
+     * Fragment displaying View to add an Action
+     */
     private Fragment fragmentAdd;
 
-    //FOR DATAS
+    //Id of the two Fragments
     private static final int FRAGMENT_HOME = 0;
     private static final int FRAGMENT_ADD = 1;
 
+    /**
+     * Function launched when the MainActivity is created
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,17 +64,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         this.showFirstFragment();
     }
 
-    // ---------------------
-    // CONFIGURATION
-    // ---------------------
-
-    // 1 - Configure Toolbar
+    /**
+     * Function to configure the toolbar
+     */
     private void configureToolBar () {
         this.toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
     }
 
-    // 2 - Configure Drawer Layout
+    /**
+     * Function to configure the drawer
+     */
     private void configureDrawerLayout () {
         this.drawerLayout = (DrawerLayout) findViewById(R.id.activity_main_drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -62,15 +82,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toggle.syncState();
     }
 
-    // 3 - Configure NavigationView
+    /**
+     * Function to configure NavigationView
+     */
     private void configureNavigationView () {
         this.navigationView = (NavigationView) findViewById(R.id.activity_main_nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
 
+    /**
+     * Function to close the DrawerLayout
+     */
     @Override
     public void onBackPressed() {
-        // 5 - Handle back click to close menu
         if (this.drawerLayout.isDrawerOpen(GravityCompat.START)) {
             this.drawerLayout.closeDrawer(GravityCompat.START);
         } else {
@@ -78,13 +102,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-
+    /**
+     * Function to display a Fragment when selected in the drawer
+     * @param item The selected item
+     * @return
+     */
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
 
         int id = item.getItemId();
 
-        // 6 - Show fragment after user clicked on a menu item
         switch (id) {
             case R.id.activity_main_drawer_home:
                 this.showFragment(FRAGMENT_HOME);
@@ -102,20 +129,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
-    // ---------------------
-    // FRAGMENTS
-    // ---------------------
-
+    /**
+     * Function to display HomeFragment by default when the app is opened
+     */
     private void showFirstFragment(){
         Fragment visibleFragment = getSupportFragmentManager().findFragmentById(R.id.activity_main_frame_layout);
         if (visibleFragment == null){
-            // 1.1 - Show News Fragment
             this.showFragment(FRAGMENT_HOME);
-            // 1.2 - Mark as selected the menu item corresponding to NewsFragment
+            //Mark as selected the menu item corresponding to HomeFragment
             this.navigationView.getMenu().getItem(0).setChecked(true);
         }
     }
 
+    /**
+     * Function to show a fragment
+     * @param fragmentIdentifier the Id of the fragment
+     */
     private void showFragment(int fragmentIdentifier) {
         switch (fragmentIdentifier) {
             case FRAGMENT_HOME:
@@ -129,23 +158,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-    // ---
-
-    // 4 - Create each fragment page and show it
-
+    /**
+     * Function to create and show HomeFragment
+     */
     private void showHomeFragment() {
         if (this.fragmentHome == null) this.fragmentHome = HomeFragment.newInstance();
         this.startTransactionFragment(this.fragmentHome);
     }
 
+    /**
+     * Function to create and show AddFragment
+     */
     private void showAddFragment() {
         if (this.fragmentAdd == null) this.fragmentAdd = AddFragment.newInstance();
         this.startTransactionFragment(this.fragmentAdd);
     }
 
-    // ---
-
-    // 3 - Generic method that will replace and show a fragment inside the MainActivity Frame Layout
+    /**
+     * Function to replace and show a fragment inside the MainActivity Frame Layout
+     */
     private void startTransactionFragment(Fragment fragment) {
         if (!fragment.isVisible()) {
             getSupportFragmentManager().beginTransaction()
