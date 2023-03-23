@@ -29,4 +29,5 @@
     <string name="d_sherber">Désherber</string>
     <string name="remise_0">Remise à 0</string>
     <string name="recolter">Récolter</string>
+    <string name="date_format">DD/MM/YYYY</string>
 </resources>
