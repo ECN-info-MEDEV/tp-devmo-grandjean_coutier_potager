@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,6 +17,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import com.example.monpotager.database.ActionViewModel;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -29,14 +32,35 @@ public class AddFragment extends Fragment {
         return (new AddFragment());
     }
 
+    /**
+     * ActionViewModel to display the parcelles
+     */
+    private ActionViewModel mActionViewModel;
+
+    /**
+     * List of all available Parcelles to display in the Spinner
+     */
+    private List<String> parcellesList;
+
     // attribut pour stocker l'action choisie
     private String actionchoisie = "";
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_add, container, false);
         Resources res = getResources();
         Context context = getActivity().getApplicationContext();
+
+        // Create ActionViewModel and get all Actions
+        mActionViewModel = new ViewModelProvider(this).get(ActionViewModel.class);
+        mActionViewModel.getAllParcelles().observe(this.getViewLifecycleOwner(), parcelles -> {
+            parcelles.forEach(parcelle -> {
+                String parcelleName = "Parcelle n°" + String.valueOf(parcelle.getId());
+                parcellesList.add(parcelleName);
+            });
+
+        });
 
         // Mettre le bon élément en première position pour qu'il puisse de cette manière apparaitre directement lorsqu'on ouvre le form
         String[] planetsArray = res.getStringArray(R.array.planets_array);
