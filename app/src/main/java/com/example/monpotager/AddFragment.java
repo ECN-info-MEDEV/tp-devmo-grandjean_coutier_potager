@@ -1,5 +1,7 @@
 package com.example.monpotager;
 
+import static java.lang.Long.parseLong;
+
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.PorterDuff;
@@ -94,8 +96,10 @@ public class AddFragment extends Fragment {
                 }
                 else {
                     // Récupération de la valeur du Spinner
-                    String text = spinner.getSelectedItem().toString();
-                    Log.d("Sélection", text);
+                    String parcelleName = spinner.getSelectedItem().toString();
+                    String parcelleIdString = parcelleName.substring(parcelleName.length() - 1);
+                    Long parcelleId = parseLong(parcelleIdString);
+                    Log.d("Sélection", parcelleIdString);
 
                     // On indique que l'action a bien été enregistrée
                     Toast toast = Toast.makeText(context, "Action enregistrée", Toast.LENGTH_LONG);
