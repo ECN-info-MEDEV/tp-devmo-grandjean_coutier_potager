@@ -23,4 +23,10 @@
     <string name="ajout_activite">Ajouter une Activité</string>
     <string name="valider">Valider</string>
     <string name="toast_message">Fonctionne !</string>
+    <string name="datetext">Date :</string>
+    <string name="planter">Planter</string>
+    <string name="arroser">Arroser</string>
+    <string name="d_sherber">Désherber</string>
+    <string name="remise_0">Remise à 0</string>
+    <string name="recolter">Récolter</string>
 </resources>

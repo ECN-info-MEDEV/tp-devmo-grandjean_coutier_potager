@@ -41,7 +41,7 @@
         android:layout_marginStart="4dp"
         android:layout_marginTop="24dp"
         android:backgroundTint="#DFDBDB"
-        android:text="Récolter"
+        android:text="@string/recolter"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/button_arrosage"
@@ -52,7 +52,7 @@
         android:layout_width="wrap_content"
         android:layout_height="70dp"
         android:backgroundTint="#DFDBDB"
-        android:text="Remise à 0"
+        android:text="@string/remise_0"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/button_désherbage"
@@ -65,7 +65,7 @@
         android:layout_height="70dp"
         android:layout_marginEnd="32dp"
         android:backgroundTint="#DFDBDB"
-        android:text="Désherber"
+        android:text="@string/d_sherber"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -76,7 +76,7 @@
         android:layout_width="wrap_content"
         android:layout_height="70dp"
         android:backgroundTint="#DFDBDB"
-        android:text="Arroser"
+        android:text="@string/arroser"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/button_recolte"
@@ -87,23 +87,53 @@
         android:layout_width="wrap_content"
         android:layout_height="70dp"
         android:backgroundTint="#DFDBDB"
-        android:text="Planter"
+        android:text="@string/planter"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/button_recolte"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/button_recolte" />
 
+    <!--button to open the material design date picker dialog-->
+
+    <!--simple text view to show the selected date by the user-->
     <Button
         android:id="@+id/button_validate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="276dp"
+        android:layout_marginBottom="24dp"
         android:backgroundTint="#DFDBDB"
         android:text="@string/valider"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/show_selected_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="73dp"
+        android:text="@string/datetext"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@+id/editTextDate"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner" />
+        app:layout_constraintTop_toBottomOf="@+id/button_remise0" />
+
+    <EditText
+        android:id="@+id/editTextDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="65dp"
+        android:ems="10"
+        android:inputType="date"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/show_selected_date"
+        app:layout_constraintTop_toBottomOf="@+id/button_remise0"
+        android:autofillHints="" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
