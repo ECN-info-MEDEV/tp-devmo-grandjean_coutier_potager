@@ -20,4 +20,7 @@
     <string name="parcelle">Parcelle</string>
     <string name="date">Date</string>
     <string name="historique_global">Historique Global</string>
+    <string name="ajout_activite">Ajouter une Activité</string>
+    <string name="valider">Valider</string>
+    <string name="toast_message">Fonctionne !</string>
 </resources>
