@@ -47,9 +47,5 @@ public class HomeFragment extends Fragment {
         return layout;
     }
 
-    public void ValidateForm(View view) {
-        Toast toast = Toast.makeText(getActivity(), R.string.toast_message, Toast.LENGTH_LONG);
-        toast.show();
-    }
 }
 
