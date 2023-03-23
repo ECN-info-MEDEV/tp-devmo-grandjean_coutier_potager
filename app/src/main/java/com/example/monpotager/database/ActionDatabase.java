@@ -14,24 +14,37 @@ import com.example.monpotager.models.Parcelle;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+/**
+ * Database to manage Actions and Parcelles
+ */
 @Database(entities = {Parcelle.class, Action.class}, version = 1, exportSchema = false)
 public abstract class ActionDatabase extends RoomDatabase {
 
-    // --- DAO ---
+    /**
+     * Create the ActionDao
+     * @return the Action Dao
+     */
     public abstract ActionDao actionDao();
 
+    /**
+     * Create the ParcelleDao
+     * @return the Parcelle Dao
+     */
     public abstract ParcelleDao parcelleDao();
 
 
-    // --- SINGLETON ---
+    //Create the singleton
     private static volatile ActionDatabase INSTANCE;
     private static final int NUMBER_OF_THREADS = 4;
     static final ExecutorService databaseWriteExecutor =
             Executors.newFixedThreadPool(NUMBER_OF_THREADS);
 
 
-    // --- INSTANCE ---
-
+    /**
+     * Function to get Database in a context
+     * @param context
+     * @return the Database built
+     */
     public static ActionDatabase getDatabase(final Context context) {
 
         if (INSTANCE == null) {
@@ -50,6 +63,10 @@ public abstract class ActionDatabase extends RoomDatabase {
         return INSTANCE;
     }
 
+    /**
+     * Function to prepopulate the Databse
+     * @return a callBack
+     */
     private static Callback prepopulateDatabase() {
 
         return new Callback() {
@@ -60,6 +77,7 @@ public abstract class ActionDatabase extends RoomDatabase {
                 super.onCreate(db);
 
                 Executors.newSingleThreadExecutor().execute(() -> {
+                    //Create Daos and delete all Actions and Parcelles
                     ParcelleDao parcelleDao = INSTANCE.parcelleDao();
                     ActionDao actionDao = INSTANCE.actionDao();
                     parcelleDao.deleteAll();

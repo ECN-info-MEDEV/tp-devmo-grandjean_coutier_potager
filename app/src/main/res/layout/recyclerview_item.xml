@@ -9,35 +9,30 @@
         android:layout_height="match_parent"
         android:stretchColumns="3">
 
-    <TableRow android:background="#DAE8FC" android:padding="5dp"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#E2F4E2"
+            >
 
-        <TextView
-            android:id="@+id/action_type"
+            <TextView
+                android:id="@+id/action_type"
+                style="@style/table_item"
+                android:layout_column="0"
+                android:layout_weight="1" />
 
-            android:layout_column="0"
-            android:layout_margin="1dp"
-            android:layout_weight="1"
-            android:textAlignment="center"
-            android:padding="3dip" />
+            <TextView
+                android:id="@+id/action_parcelle_id"
+                style="@style/table_item"
+                android:layout_column="1"
+                android:layout_weight="1" />
 
-        <TextView
-            android:id="@+id/action_parcelle_id"
-            android:layout_column="1"
-            android:layout_margin="1dp"
-            android:layout_weight="1"
-            android:textAlignment="center"
-            android:padding="3dip" />
-
-        <TextView
-            android:id="@+id/action_date"
-            android:textAlignment="center"
-            android:padding="3dip"
-            android:layout_column="2"
-            android:layout_margin="1dp"
-            android:layout_weight="1" />
-    </TableRow>
+            <TextView
+                android:id="@+id/action_date"
+                style="@style/table_item"
+                android:layout_column="2"
+                android:layout_weight="1"/>
+        </TableRow>
 
     </TableLayout>
 
